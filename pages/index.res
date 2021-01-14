@@ -1,7 +1,7 @@
 open Next
 open Utils
 open Hooks
-
+open Tailwind
 /*
 // INFO: This is example of how to add event listener to the window object
   React.useEffect0(() => {
@@ -88,7 +88,7 @@ module Styles = {
     transformOrigin(px(0), px(0)),
     // TODO: Prevent animation while resizing.
     // INFO: https://css-tricks.com/stop-animations-during-window-resizing/
-    transition("transform", ~duration=400, ~timingFunction=#easeInOut),
+    CssJs.transition("transform", ~duration=400, ~timingFunction=#easeInOut),
   ])
 
   let nav = CssJs.merge(.[max799Nav, nav800])
@@ -121,7 +121,7 @@ module Styles = {
       // NOTE: If you want animation to start from left for example
       // transformOrigin(#px(0), #px(0)),
       //  transformOrigin(#px(0), #percent(100.)),
-      transition("transform", ~timingFunction=#easeInOut, ~duration=250),
+      CssJs.transition("transform", ~timingFunction=#easeInOut, ~duration=250),
     ]),
     hover([before([transform(#scale(1., 1.))])]),
   ])
@@ -133,7 +133,7 @@ module Styles = {
       textTransform(#uppercase),
       opacity(0.),
       // NOTE: This transition fires when you close navigation
-      transition("opacity", ~duration=150, ~timingFunction=#easeInOut),
+      CssJs.transition("opacity", ~duration=150, ~timingFunction=#easeInOut),
     ]),
     navAHover,
     navA800,
@@ -145,7 +145,7 @@ module Styles = {
       selector(
         "~ nav a",
         // NOTE: This transition fires when you open navigation
-        [opacity(1.), transition("opacity", ~duration=250, ~timingFunction=#easeInOut, ~delay=250)],
+        [opacity(1.), CssJs.transition("opacity", ~duration=250, ~timingFunction=#easeInOut, ~delay=250)],
       ),
     ]),
   ])
@@ -188,12 +188,13 @@ module Styles = {
 
   let toggleLabelSpan = CssJs.merge(.[style(. whiteBar), beforeAndAfterSpan])
 
+let boxStyles=CssJs.merge(.[bgGray400])
   // TODO: Add hamburger icon toggle animation
 }
 
 let default = () => {
   // TODO: Stop animation when mouse leaves window. Use onMouseLeave and onMouseEnter
-  useStopAnimationJank()
+useStopAnimationJank()
 
   <div>
     <Head>
@@ -221,6 +222,8 @@ let default = () => {
       <div className={CssJs.merge(.[Styles.content, %tw("place-items-center")])}>
         <h2> {"Your content would go here"->str} </h2>
       </div>
+        <Box className=CssJs.merge(.[Styles.boxStyles]) />
+        <BoxPurple/>
     </main>
   </div>
 }
